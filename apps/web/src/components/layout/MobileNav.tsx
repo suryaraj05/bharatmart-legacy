@@ -32,7 +32,12 @@ export function MobileNav({ isSignedIn }: { isSignedIn: boolean }) {
   return (
     <Sheet onOpenChange={setOpen} open={open}>
       <SheetTrigger asChild>
-        <Button aria-label="Open navigation" className="md:hidden" size="icon" variant="ghost">
+        <Button
+          aria-label="Open navigation"
+          className="h-9 w-9 shrink-0 md:hidden"
+          size="icon"
+          variant="ghost"
+        >
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>

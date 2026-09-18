@@ -52,7 +52,7 @@ export default async function ProductDetailPage({
   }
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-8 md:px-8 lg:px-16">
+    <main className="mx-auto max-w-7xl px-4 pb-8 pt-3 md:px-8 md:pt-8 lg:px-16">
       <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[#837561]">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
@@ -114,13 +114,13 @@ export default async function ProductDetailPage({
 
           <p className="leading-7 text-[#514534]">{product.description}</p>
 
-          <div className="flex flex-wrap gap-3">
+          <div className="flex w-full flex-col gap-2">
             <AddToCartButton
-              className="h-11 bg-[#2e6a39] px-6 text-white hover:bg-[#135224]"
+              className="h-11 w-full bg-[#2e6a39] px-6 text-white hover:bg-[#135224]"
               item={wishlistItem}
               showIcon
             />
-            <FavoriteButton item={wishlistItem} variant="labeled" />
+            <FavoriteButton className="w-full" item={wishlistItem} variant="labeled" />
           </div>
 
           <Card className="border-[#d6c4ad] bg-[#f9f3ea]">

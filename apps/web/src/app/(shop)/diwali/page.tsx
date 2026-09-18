@@ -9,7 +9,13 @@ export const metadata: Metadata = {
     'Shop authentic Diwali essentials - diyas, pooja kits, rangoli materials, and festive decor delivered across the UK.',
 }
 
-const kits = [
+/** Legacy Diwali catalogue (ported from bharatmart.uk/diwali.html). */
+const catalogue = [
+  {
+    title: 'Diwali Pooja Kit',
+    image: '/seasonal/diwali/navratri-03.jpg',
+    description: 'Festive décor essentials to set the mood for Diwali at home.',
+  },
   {
     title: 'Diwali Pooja Kit',
     image: '/seasonal/diwali/diwali-pooja-kit-new.jpg',
@@ -21,11 +27,31 @@ const kits = [
     description: 'Vibrant colours and traditional patterns for festive doorways.',
   },
   {
-    title: 'Rangoli Stencils Kit',
+    title: 'Diwali Special Stencils',
     image: '/seasonal/diwali/stencils-diwali-kit.jpg',
     description: 'Easy stencils for beautiful rangoli designs every time.',
   },
-]
+  {
+    title: 'Golden Diyas',
+    image: '/seasonal/diwali/navratri-05.jpg',
+    description: 'Eco-friendly golden diyas to light up your celebration.',
+  },
+  {
+    title: 'Premium Diyas',
+    image: '/seasonal/diwali/navratri-06.jpg',
+    description: 'Premium diya set for temple and home rituals.',
+  },
+  {
+    title: 'Decorative Diyas',
+    image: '/seasonal/diwali/navratri-07.jpg',
+    description: 'Decorative diyas for festive tables and rangoli displays.',
+  },
+  {
+    title: 'Decorative Diyas Big Pack',
+    image: '/seasonal/diwali/navratri-08.jpg',
+    description: 'Larger pack of decorative diyas for bigger gatherings.',
+  },
+] as const
 
 export default function DiwaliPage() {
   return (
@@ -40,7 +66,7 @@ export default function DiwaliPage() {
         <div className="relative mx-auto flex min-h-[280px] max-w-7xl items-end px-4 py-10 md:min-h-[360px] md:px-8 md:py-14 lg:px-16">
           <div className="max-w-lg text-white">
             <p className="text-sm font-semibold uppercase tracking-wide text-[#FFD700]">
-              Festival Essentials
+              Festival of Lights
             </p>
             <h1 className="mt-2 font-heading text-3xl font-semibold md:text-4xl">
               Diwali Collection
@@ -71,17 +97,20 @@ export default function DiwaliPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-10 md:px-8 lg:px-16">
         <section>
-          <h2 className="font-heading text-xl font-semibold text-[#1e1b16]">Featured kits</h2>
-          <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {kits.map((kit) => (
+          <h2 className="font-heading text-xl font-semibold text-[#1e1b16]">Diwali catalogue</h2>
+          <p className="mt-1 text-sm text-[#514534]">
+            Browse our classic Diwali essentials — diyas, kits and décor. Message us to order.
+          </p>
+          <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {catalogue.map((item, index) => (
               <article
                 className="overflow-hidden rounded-2xl border border-[#e8d9c8] bg-[#fffaf4]"
-                key={kit.title}
+                key={`${item.title}-${index}`}
               >
-                <img alt={kit.title} className="aspect-square w-full object-cover" src={kit.image} />
+                <img alt={item.title} className="aspect-square w-full object-cover" src={item.image} />
                 <div className="p-4">
-                  <h3 className="font-semibold text-[#E65100]">{kit.title}</h3>
-                  <p className="mt-1 text-sm text-[#514534]">{kit.description}</p>
+                  <h3 className="font-semibold text-[#E65100]">{item.title}</h3>
+                  <p className="mt-1 text-sm text-[#514534]">{item.description}</p>
                 </div>
               </article>
             ))}

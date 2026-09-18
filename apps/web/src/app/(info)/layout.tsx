@@ -4,7 +4,7 @@ import { WhatsAppFloat } from '@/components/layout/WhatsAppFloat'
 
 export default function InfoLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen max-w-[100vw] overflow-x-clip bg-[#fff8f0] text-[#1e1b16]">
+    <div className="min-h-screen w-full overflow-x-clip bg-[#fff8f0] text-[#1e1b16]">
       <SiteHeader />
       {children}
       <SiteFooter />

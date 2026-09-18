@@ -12,7 +12,7 @@ export function CartLink() {
   return (
     <Link
       aria-label={`Shopping cart with ${count} items`}
-      className="relative rounded-full p-2 text-[#7f5700] transition hover:bg-[#eee7de]"
+      className="relative rounded-full p-1.5 text-[#7f5700] transition hover:bg-[#eee7de] sm:p-2"
       href="/cart"
     >
       <ShoppingCart className="h-5 w-5" />

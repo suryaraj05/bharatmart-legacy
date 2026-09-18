@@ -16,9 +16,9 @@ export async function SiteHeader({ location }: { location?: CustomerLocation }) 
   const profile = user ? await AuthService.getProfile(user.id) : null
 
   return (
-    <header className="sticky top-0 z-50 isolate w-full max-w-[100vw] overflow-x-clip border-b border-black/5 bg-[#fff8f0] shadow-[0_4px_12px_rgba(0,0,0,0.04)] [background-color:#fff8f0]">
-      <div className="flex h-14 w-full max-w-full items-center gap-1.5 px-2 sm:gap-2 sm:px-3 md:h-20 md:gap-3 md:px-4 lg:px-5">
-        <div className="flex min-w-0 flex-1 items-center gap-1.5 sm:gap-2 md:gap-3">
+    <header className="sticky top-0 z-50 isolate w-full overflow-x-clip border-b border-black/5 bg-[#fff8f0] shadow-[0_4px_12px_rgba(0,0,0,0.04)] [background-color:#fff8f0]">
+      <div className="flex h-14 w-full items-center justify-between gap-1 pl-2 pr-1.5 sm:gap-2 sm:px-3 md:h-20 md:gap-3 md:px-4 lg:px-5">
+        <div className="flex min-w-0 items-center gap-1.5 sm:gap-2 md:gap-3">
           <MobileNav isSignedIn={Boolean(user)} />
           <Link className="flex min-w-0 shrink items-center justify-center bg-transparent" href="/">
             <img
@@ -34,7 +34,7 @@ export async function SiteHeader({ location }: { location?: CustomerLocation }) 
           {location ? <LocationChip location={location} /> : null}
         </div>
 
-        <nav className="ml-auto flex shrink-0 items-center gap-0.5 sm:gap-1 md:gap-2">
+        <nav className="flex shrink-0 items-center gap-0 sm:gap-1 md:gap-2">
           {/* Favourites stay in the mobile menu; keep icon from md up */}
           <div className="hidden md:block">
             <WishlistLink />

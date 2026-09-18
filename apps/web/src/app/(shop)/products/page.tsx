@@ -102,7 +102,7 @@ export default async function ProductsPage({
   const subheading = `${itemLabel} · ${deliveryHint}`
 
   return (
-    <main className="mx-auto max-w-7xl px-4 py-6 md:px-8 md:py-8 lg:px-16">
+    <main className="mx-auto max-w-7xl px-4 pb-6 pt-0 md:px-8 md:pb-8 md:pt-6 lg:px-16">
       <div className="grid gap-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start lg:gap-8">
         <aside className="hidden lg:block lg:sticky lg:top-20 lg:z-20 lg:self-start lg:max-h-[calc(100vh-5.5rem)] lg:overflow-y-auto lg:pb-4">
           <Suspense fallback={<div className="h-96 animate-pulse rounded-xl bg-[#f4ede4]" />}>
@@ -111,7 +111,14 @@ export default async function ProductsPage({
         </aside>
 
         <section className="min-w-0">
-          <nav aria-label="Breadcrumb" className="mb-4 text-sm text-[#837561]">
+          {/* Sort sits flush under the sticky header (h-14 / md:h-20) */}
+          <div className="sticky top-14 z-30 -mx-4 mb-3 border-b border-[#e8d9c8] bg-[#fff8f0] px-4 py-2.5 md:top-20 md:mx-0 md:mb-4 md:px-0 md:py-3">
+            <Suspense fallback={null}>
+              <ProductsToolbar categories={liveCategories} merchants={merchants} />
+            </Suspense>
+          </div>
+
+          <nav aria-label="Breadcrumb" className="mb-2 hidden text-sm text-[#837561] md:mb-4 md:block">
             <ol className="flex flex-wrap items-center gap-2">
               <li>
                 <Link className="hover:text-[#7f5700]" href="/">
@@ -138,15 +145,11 @@ export default async function ProductsPage({
             </ol>
           </nav>
 
-          <div className="mb-4">
-            <h1 className="font-heading text-3xl font-semibold text-[#1e1b16]">{heading}</h1>
-            <p className="mt-1 text-sm text-[#514534]">{subheading}</p>
-          </div>
-
-          <div className="sticky top-16 z-30 -mx-4 mb-4 border-b border-[#e8d9c8] bg-[#fff8f0] px-4 py-3 md:top-20 md:mx-0 md:px-0">
-            <Suspense fallback={null}>
-              <ProductsToolbar categories={liveCategories} merchants={merchants} />
-            </Suspense>
+          <div className="mb-3 md:mb-4">
+            <h1 className="font-heading text-xl font-semibold text-[#1e1b16] md:text-3xl">
+              {heading}
+            </h1>
+            <p className="mt-0.5 text-xs text-[#514534] md:mt-1 md:text-sm">{subheading}</p>
           </div>
 
           {result.items.length === 0 ? (

@@ -20,10 +20,10 @@ export function SeasonalCtaGrid() {
       </div>
 
       {/* Mobile: compact horizontal strip so the hero stays dominant */}
-      <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:mx-0 sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-3">
+      <div className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-5 sm:overflow-visible sm:pb-0 lg:grid-cols-3">
         {SEASONAL_CTAS.map((item) => (
           <Link
-            className="group relative w-[42vw] max-w-[11.5rem] shrink-0 overflow-hidden rounded-xl border border-[#e8d9c8] bg-[#fffaf4] shadow-sm transition hover:border-[#d6c4ad] hover:shadow-md sm:w-auto sm:max-w-none sm:rounded-2xl"
+            className="group relative w-[min(42vw,11.5rem)] shrink-0 overflow-hidden rounded-xl border border-[#e8d9c8] bg-[#fffaf4] shadow-sm transition hover:border-[#d6c4ad] hover:shadow-md sm:w-auto sm:max-w-none sm:rounded-2xl"
             href={item.href}
             key={item.title}
           >

@@ -24,8 +24,8 @@ export const MARKETING_NAV: MarketingNavItem[] = [
   {
     label: 'Festive Collections',
     children: [
+      { label: 'Diwali', href: '/diwali' },
       { label: 'Rakhi', href: '/products?category=rakhi' },
-      { label: 'Diwali', href: '/diwali', comingSoon: true },
       { label: 'Ganesh', href: '/products?category=ganesh' },
     ],
   },
@@ -43,6 +43,13 @@ export const MARKETING_NAV: MarketingNavItem[] = [
 
 export const SEASONAL_CTAS = [
   {
+    title: 'Diwali',
+    description: 'Diyas, pooja kits, rangoli and festive decor for the Festival of Lights.',
+    href: '/diwali',
+    image: '/seasonal/diwali/banner_2.png',
+    accent: '#B3472C',
+  },
+  {
     title: 'Rakhi',
     description: 'Authentic rakhis and gift sets for Raksha Bandhan.',
     href: '/products?category=rakhi',
@@ -55,14 +62,6 @@ export const SEASONAL_CTAS = [
     href: '/products?category=ganesh',
     image: '/gallery/01.jpg',
     accent: '#6A1B9A',
-  },
-  {
-    title: 'Diwali',
-    description: 'Diyas, pooja kits, rangoli and festive decor — coming soon.',
-    href: '/diwali',
-    image: '/seasonal/diwali/banner_2.png',
-    accent: '#B3472C',
-    comingSoon: true,
   },
   {
     title: 'Mangoes',

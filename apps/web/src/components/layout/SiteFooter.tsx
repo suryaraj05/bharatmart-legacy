@@ -9,8 +9,8 @@ const footerGroups = [
   {
     title: 'Shop',
     links: [
-      ['Rakhi', '/products?category=rakhi'],
       ['Diwali', '/diwali'],
+      ['Rakhi', '/products?category=rakhi'],
       ['Mangoes', '/mangoes'],
       ['Favourites', '/wishlist'],
     ],

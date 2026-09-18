@@ -67,7 +67,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
             {product.name}
           </h3>
         </Link>
-        <div className="mt-2 flex flex-col gap-2 sm:mt-4 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+        <div className="mt-2 flex flex-col gap-1.5 sm:mt-3">
           {hidePrice ? (
             <span className="text-xs font-medium text-[#837561] sm:text-sm">On request</span>
           ) : (
@@ -76,7 +76,7 @@ export function ProductCard({ product }: { product: ProductSummary }) {
             </span>
           )}
           <AddToCartButton
-            className="h-8 w-full shrink-0 bg-[#2e6a39] px-2 text-[11px] text-white hover:bg-[#135224] sm:h-9 sm:w-auto sm:px-3 sm:text-sm"
+            className="h-8 w-full bg-[#2e6a39] px-2 text-[11px] text-white hover:bg-[#135224] sm:h-9 sm:text-sm"
             item={{
               productId: product.id,
               slug: product.slug,

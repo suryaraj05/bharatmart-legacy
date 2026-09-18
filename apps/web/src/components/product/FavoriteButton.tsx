@@ -44,7 +44,7 @@ export function FavoriteButton({
         aria-label={saved ? `Remove ${item.name} from favourites` : `Save ${item.name} to favourites`}
         aria-pressed={saved}
         className={cn(
-          'h-11 border-[#a83635] px-6 text-[#a83635] hover:bg-[#f9f3ea]',
+          'h-11 w-full border-[#a83635] px-6 text-[#a83635] hover:bg-[#f9f3ea]',
           saved && 'bg-[#f9f3ea]',
           className,
         )}
