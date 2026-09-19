@@ -63,7 +63,7 @@ export const SEASONAL_CTAS = [
   },
   {
     title: 'Ganesh',
-    description: 'Previous-year Ganesh idols — currently out of stock.',
+    description: 'Previous-year Ganesh idols - currently out of stock.',
     href: '/products?category=ganesh',
     image: '/gallery/01.jpg',
     accent: '#6A1B9A',

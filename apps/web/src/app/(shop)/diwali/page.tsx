@@ -99,7 +99,7 @@ export default function DiwaliPage() {
         <section>
           <h2 className="font-heading text-xl font-semibold text-[#1e1b16]">Diwali catalogue</h2>
           <p className="mt-1 text-sm text-[#514534]">
-            Browse our classic Diwali essentials — diyas, kits and décor. Message us to order.
+            Browse our classic Diwali essentials - diyas, kits and décor. Message us to order.
           </p>
           <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {catalogue.map((item, index) => (

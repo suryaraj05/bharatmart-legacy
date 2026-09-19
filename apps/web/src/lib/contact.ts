@@ -21,3 +21,12 @@ export const WHATSAPP_URL = getWhatsAppSupportUrl()
 export const INSTAGRAM_URL = 'https://www.instagram.com/bharatmart_uk'
 export const CONTACT_EMAIL = 'bharatmartuk@gmail.com'
 export const CONTACT_EMAIL_HREF = 'mailto:bharatmartuk@gmail.com'
+
+/** Prefills subject/body where a mail client is available. */
+export function getContactMailtoHref(options?: { subject?: string; body?: string }) {
+  const params = new URLSearchParams()
+  if (options?.subject) params.set('subject', options.subject)
+  if (options?.body) params.set('body', options.body)
+  const query = params.toString()
+  return query ? `${CONTACT_EMAIL_HREF}?${query}` : CONTACT_EMAIL_HREF
+}

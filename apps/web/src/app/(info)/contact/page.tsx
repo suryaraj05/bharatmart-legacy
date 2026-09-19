@@ -8,7 +8,7 @@ import {
 import { ContactForm } from './ContactForm'
 import {
   CONTACT_EMAIL,
-  CONTACT_EMAIL_HREF,
+  getContactMailtoHref,
   INSTAGRAM_URL,
   getWhatsAppSupportUrl,
 } from '@/lib/contact'
@@ -43,6 +43,9 @@ export default function ContactPage() {
   const whatsappUrl = getWhatsAppSupportUrl(
     'Hi BharatMart UK - I have a question about my order / becoming a merchant.',
   )
+  const mailtoUrl = getContactMailtoHref({
+    subject: 'Bharat Mart enquiry',
+  })
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 md:px-8 lg:px-16">
@@ -87,7 +90,7 @@ export default function ContactPage() {
                   <p className="text-xs font-medium uppercase tracking-wide text-[#514534]">
                     Email Support
                   </p>
-                  <a className="text-lg font-semibold text-[#a83635] hover:underline" href={CONTACT_EMAIL_HREF}>
+                  <a className="text-lg font-semibold text-[#a83635] hover:underline" href={mailtoUrl}>
                     {CONTACT_EMAIL}
                   </a>
                 </div>

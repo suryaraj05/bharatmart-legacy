@@ -37,7 +37,7 @@ export function HeaderAuthNav({ isSignedIn, displayName }: HeaderAuthNavProps) {
         >
           <Link href="/register">Sign up</Link>
         </Button>
-        {/* Mobile: one account icon — Sign in / Sign up live in the hamburger menu */}
+        {/* Mobile: one account icon - Sign in / Sign up live in the hamburger menu */}
         <Button asChild className="md:hidden" size="icon" title="Account" variant="ghost">
           <Link aria-label="Sign in" href="/login">
             <UserCircle className="h-5 w-5 text-[#7f5700]" />
