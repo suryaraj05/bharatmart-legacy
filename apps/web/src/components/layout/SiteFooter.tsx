@@ -19,6 +19,7 @@ const footerGroups = [
     title: 'Company',
     links: [
       ['About Us', '/about'],
+      ['AI & Tech Consultation', '/ai-consultation'],
       ['Gallery', '/gallery'],
       ['Contact Us', '/contact'],
       ['Privacy policy', '/privacy-policy'],

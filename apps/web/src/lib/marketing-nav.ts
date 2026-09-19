@@ -15,12 +15,17 @@ export type MarketingNavItem = {
 export const HEADER_LINKS = [
   { label: 'Home', href: '/' },
   { label: 'About Us', href: '/about' },
+  { label: 'AI & Tech', href: '/ai-consultation' },
   { label: 'Gallery', href: '/gallery' },
   { label: 'Contact Us', href: '/contact' },
 ] as const
 
 /** Static marketing category tree for the seasonal storefront. */
 export const MARKETING_NAV: MarketingNavItem[] = [
+  {
+    label: 'AI and Technology Consultation',
+    href: '/ai-consultation',
+  },
   {
     label: 'Festive Collections',
     children: [
