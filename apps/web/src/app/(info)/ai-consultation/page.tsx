@@ -62,12 +62,11 @@ export default function AiConsultationPage() {
     <main>
       <section className="relative overflow-hidden">
         <img
-          alt=""
-          aria-hidden
+          alt="Modern office overlooking a city skyline at dusk"
           className="absolute inset-0 h-full w-full object-cover object-center"
-          src="/seasonal/diwali/banner_2.png"
+          src="/seasonal/tech/consultation-banner.jpg"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1208] via-[#1a1208]/92 to-[#1a1208]/55" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1a1208]/88 via-[#1a1208]/72 to-[#1a1208]/35" />
         <div className="relative mx-auto flex min-h-[340px] max-w-7xl items-end px-4 py-12 md:min-h-[420px] md:px-8 md:py-16 lg:px-16">
           <div className="max-w-2xl text-white">
             <p className="text-sm font-semibold uppercase tracking-[0.14em] text-[#FFD700]">
