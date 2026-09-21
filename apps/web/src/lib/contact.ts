@@ -19,8 +19,8 @@ export function getWhatsAppSupportUrl(message?: string) {
 export const WHATSAPP_NUMBER = getWhatsAppSupportNumber()
 export const WHATSAPP_URL = getWhatsAppSupportUrl()
 export const INSTAGRAM_URL = 'https://www.instagram.com/bharatmart_uk'
-export const CONTACT_EMAIL = 'bharatmartuk@gmail.com'
-export const CONTACT_EMAIL_HREF = 'mailto:bharatmartuk@gmail.com'
+export const CONTACT_EMAIL = 'info@bharatmart.com'
+export const CONTACT_EMAIL_HREF = 'mailto:info@bharatmart.com'
 
 /** Prefills subject/body where a mail client is available. */
 export function getContactMailtoHref(options?: { subject?: string; body?: string }) {

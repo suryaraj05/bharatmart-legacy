@@ -23,10 +23,6 @@ export const HEADER_LINKS = [
 /** Static marketing category tree for the seasonal storefront. */
 export const MARKETING_NAV: MarketingNavItem[] = [
   {
-    label: 'AI and Technology Consultation',
-    href: '/ai-consultation',
-  },
-  {
     label: 'Festive Collections',
     children: [
       { label: 'Diwali', href: '/diwali' },
@@ -37,6 +33,10 @@ export const MARKETING_NAV: MarketingNavItem[] = [
   {
     label: 'Seasonal Stuff',
     children: [{ label: 'Mangoes', href: '/mangoes' }],
+  },
+  {
+    label: 'AI and Technology Consultation',
+    href: '/ai-consultation',
   },
   { label: 'Homemade Foods', comingSoon: true },
   { label: 'Indian Clothing', comingSoon: true },
