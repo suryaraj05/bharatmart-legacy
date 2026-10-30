@@ -384,7 +384,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
         ctx.save()
         ctx.rotate((-28 * Math.PI) / 180)
         ctx.font = 'bold 36px sans-serif'
-        ctx.fillStyle = 'rgba(180, 20, 20, 0.16)'
+        ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
         ctx.textAlign = 'center'
 
         const text1 = 'CONFIDENTIAL • INTERNAL PURPOSES ONLY'
@@ -402,13 +402,13 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
           for (let x = startX; x < endX; x += stepX) {
             ctx.fillText(text1, x, y)
             ctx.font = '600 24px sans-serif'
-            ctx.fillStyle = 'rgba(100, 100, 100, 0.18)'
+            ctx.fillStyle = 'rgba(81, 69, 52, 0.16)'
             ctx.fillText(text2, x, y + 36)
             ctx.font = '500 18px sans-serif'
-            ctx.fillStyle = 'rgba(180, 20, 20, 0.14)'
+            ctx.fillStyle = 'rgba(168, 54, 53, 0.12)'
             ctx.fillText(text3, x, y + 68)
             ctx.font = 'bold 36px sans-serif'
-            ctx.fillStyle = 'rgba(180, 20, 20, 0.16)'
+            ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
           }
         }
         ctx.restore()
@@ -452,7 +452,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
   return (
     <div
       ref={containerRef}
-      className="relative min-h-[85vh] w-full select-none bg-slate-950 font-sans text-slate-100"
+      className="relative min-h-[85vh] w-full select-none bg-[#fff8f0] font-sans text-[#1e1b16]"
       onContextMenu={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
       style={{ WebkitUserSelect: 'none', userSelect: 'none' }}
@@ -470,7 +470,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                 content: 'CONFIDENTIAL DOCUMENT: Printing is strictly prohibited under company non-disclosure policy.' !important;
                 display: block !important;
                 visibility: visible !important;
-                color: #dc2626 !important;
+                color: #a83635 !important;
                 font-size: 24pt !important;
                 font-weight: bold !important;
                 text-align: center !important;
@@ -483,45 +483,45 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
       {/* Floating Security Banner */}
       {isSecurityAlert && (
-        <div className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transform rounded-full border border-red-500/40 bg-red-950/90 px-6 py-2.5 text-sm font-medium text-red-200 shadow-2xl backdrop-blur-md transition-all">
+        <div className="fixed top-6 left-1/2 z-50 -translate-x-1/2 transform rounded-full border border-[#ffa39e] bg-[#fff1f0] px-6 py-2.5 text-sm font-medium text-[#cf1322] shadow-xl backdrop-blur-md transition-all">
           <div className="flex items-center gap-2">
-            <AlertTriangle className="h-4 w-4 text-red-400" />
+            <AlertTriangle className="h-4 w-4 text-[#cf1322]" />
             <span>{isSecurityAlert}</span>
           </div>
         </div>
       )}
 
-      {/* Anti-Screen-Capture / Window Blurred Shield */}
+      {/* Anti-Screen-Capture / Window Blurred Shield in Light Theme */}
       {isUnlocked && isWindowBlurred && (
-        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-slate-950/95 p-6 text-center backdrop-blur-xl">
-          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-amber-500/30 bg-amber-500/10 text-amber-400 shadow-inner">
+        <div className="absolute inset-0 z-40 flex flex-col items-center justify-center bg-[#fff8f0]/95 p-6 text-center backdrop-blur-xl">
+          <div className="flex h-20 w-20 items-center justify-center rounded-full border border-[#d6c4ad] bg-[#f4ede4] text-[#7f5700] shadow-sm">
             <ShieldAlert className="h-10 w-10 animate-pulse" />
           </div>
-          <h2 className="mt-4 text-2xl font-bold tracking-tight text-white">
+          <h2 className="mt-4 font-heading text-2xl font-bold tracking-tight text-[#1e1b16]">
             Confidential Document Hidden
           </h2>
-          <p className="mt-2 max-w-md text-sm text-slate-400">
+          <p className="mt-2 max-w-md text-sm text-[#514534]">
             To prevent unauthorized screen capture or viewing, content is concealed while this window
             is inactive.
           </p>
-          <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-900 px-4 py-2 text-xs font-semibold text-amber-300">
-            <div className="h-2 w-2 animate-ping rounded-full bg-amber-400" />
+          <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-[#d6c4ad] bg-white px-4 py-2 text-xs font-semibold text-[#7f5700] shadow-sm">
+            <div className="h-2 w-2 animate-ping rounded-full bg-[#7f5700]" />
             Click here to return focus and resume viewing
           </div>
         </div>
       )}
 
-      {/* UNLOCKED: SECURE DOCUMENT VIEWER */}
+      {/* UNLOCKED: SECURE DOCUMENT VIEWER (LIGHT THEME) */}
       {isUnlocked ? (
         <div className="flex min-h-[85vh] flex-col">
-          {/* Top Control Bar */}
-          <header className="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 bg-slate-900/95 px-4 py-3 backdrop-blur-md">
+          {/* Top Control Bar in Light Theme */}
+          <header className="sticky top-0 z-30 flex flex-wrap items-center justify-between gap-3 border-b border-[#d6c4ad] bg-white px-4 py-3 shadow-sm md:px-6">
             {/* Title & Document Badge */}
             <div className="flex items-center gap-3">
               <Link
                 href="/internal-documents"
-                className="flex items-center gap-1.5 rounded-md border border-slate-700/60 bg-slate-800/80 px-2.5 py-1 text-xs font-medium text-slate-300 transition-colors hover:bg-slate-700 hover:text-white"
-                title="Back to Internal Documents"
+                className="flex items-center gap-1.5 rounded-lg border border-[#d6c4ad] bg-[#f4ede4] px-3 py-1.5 text-xs font-medium text-[#514534] transition-colors hover:bg-[#eee7de] hover:text-[#1e1b16]"
+                title="Back to Important Documents"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>All Docs</span>
@@ -529,21 +529,21 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h1 className="text-sm font-semibold tracking-wide text-white sm:text-base">
+                  <h1 className="font-heading text-sm font-bold tracking-wide text-[#1e1b16] sm:text-base">
                     {doc.title}
                   </h1>
-                  <span className="hidden items-center gap-1 rounded bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold text-emerald-400 sm:inline-flex">
+                  <span className="hidden items-center gap-1 rounded bg-emerald-50 px-2 py-0.5 text-[10px] font-semibold text-emerald-700 border border-emerald-200 sm:inline-flex">
                     <ShieldCheck className="h-3 w-3" />
                     Verified PIN
                   </span>
                 </div>
-                <p className="text-[11px] text-slate-400">{doc.legalReference}</p>
+                <p className="text-[11px] text-[#837561]">{doc.legalReference}</p>
               </div>
             </div>
 
             {/* Sub-item selector (if applicable, e.g. Share Certificates) */}
             {doc.hasSubItems && doc.subItems && (
-              <div className="flex items-center gap-1.5 rounded-lg border border-slate-700/80 bg-slate-950 p-1">
+              <div className="flex items-center gap-1.5 rounded-xl border border-[#d6c4ad] bg-[#f4ede4] p-1">
                 {doc.subItems.map((sub) => (
                   <button
                     key={sub.id}
@@ -551,10 +551,10 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                       setActiveSubItem(sub)
                       setCurrentPage(1)
                     }}
-                    className={`rounded px-2.5 py-1 text-xs font-medium transition-all ${
+                    className={`rounded-lg px-3 py-1 text-xs font-medium transition-all ${
                       activeSubItem?.id === sub.id
-                        ? 'bg-amber-600 text-white shadow'
-                        : 'text-slate-400 hover:text-slate-200'
+                        ? 'bg-[#7f5700] text-white shadow-sm font-semibold'
+                        : 'text-[#514534] hover:text-[#1e1b16]'
                     }`}
                   >
                     {sub.label}
@@ -567,22 +567,22 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
             <div className="flex flex-wrap items-center gap-2">
               {/* Pagination (if multi-page) */}
               {totalPages > 1 && (
-                <div className="flex items-center gap-1 rounded-md border border-slate-800 bg-slate-950/80 px-1 py-0.5">
+                <div className="flex items-center gap-1 rounded-lg border border-[#d6c4ad] bg-[#fffaf4] px-1 py-0.5">
                   <button
                     disabled={currentPage <= 1}
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                    className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                    className="rounded p-1 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16] disabled:opacity-30"
                     title="Previous Page"
                   >
                     <ChevronLeft className="h-4 w-4" />
                   </button>
-                  <span className="px-2 text-xs font-medium text-slate-300">
+                  <span className="px-2 text-xs font-medium text-[#1e1b16]">
                     Page {currentPage} of {totalPages}
                   </span>
                   <button
                     disabled={currentPage >= totalPages}
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                    className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white disabled:opacity-30"
+                    className="rounded p-1 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16] disabled:opacity-30"
                     title="Next Page"
                   >
                     <ChevronRight className="h-4 w-4" />
@@ -591,24 +591,24 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
               )}
 
               {/* Zoom Controls */}
-              <div className="flex items-center gap-1 rounded-md border border-slate-800 bg-slate-950/80 px-1 py-0.5">
+              <div className="flex items-center gap-1 rounded-lg border border-[#d6c4ad] bg-[#fffaf4] px-1 py-0.5">
                 <button
                   onClick={() => setZoomLevel((z) => Math.max(0.6, z - 0.15))}
-                  className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  className="rounded p-1 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16]"
                   title="Zoom Out"
                 >
                   <ZoomOut className="h-4 w-4" />
                 </button>
                 <button
                   onClick={() => setZoomLevel(1)}
-                  className="px-1.5 text-xs font-medium text-slate-300 hover:text-white"
+                  className="px-1.5 text-xs font-semibold text-[#514534] hover:text-[#1e1b16]"
                   title="Reset Zoom"
                 >
                   {Math.round(zoomLevel * 100)}%
                 </button>
                 <button
                   onClick={() => setZoomLevel((z) => Math.min(2.5, z + 0.15))}
-                  className="rounded p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+                  className="rounded p-1 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16]"
                   title="Zoom In"
                 >
                   <ZoomIn className="h-4 w-4" />
@@ -618,7 +618,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
               {/* Rotate */}
               <button
                 onClick={() => setRotation((r) => (r + 90) % 360)}
-                className="rounded-md border border-slate-800 bg-slate-950/80 p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white"
+                className="rounded-lg border border-[#d6c4ad] bg-[#fffaf4] p-1.5 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16]"
                 title="Rotate View"
               >
                 <RotateCw className="h-4 w-4" />
@@ -627,7 +627,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
               {/* Fullscreen */}
               <button
                 onClick={toggleFullscreen}
-                className="hidden rounded-md border border-slate-800 bg-slate-950/80 p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white sm:inline-flex"
+                className="hidden rounded-lg border border-[#d6c4ad] bg-[#fffaf4] p-1.5 text-[#514534] hover:bg-[#f4ede4] hover:text-[#1e1b16] sm:inline-flex"
                 title="Toggle Fullscreen"
               >
                 {isFullscreen ? (
@@ -640,7 +640,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
               {/* Lock / Exit Button */}
               <button
                 onClick={handleLock}
-                className="flex items-center gap-1.5 rounded-md border border-red-500/30 bg-red-950/40 px-3 py-1.5 text-xs font-semibold text-red-300 transition-colors hover:bg-red-900/60 hover:text-white"
+                className="flex items-center gap-1.5 rounded-lg border border-[#ffa39e] bg-[#fff1f0] px-3 py-1.5 text-xs font-semibold text-[#cf1322] transition-colors hover:bg-[#ffccc7]"
                 title="Lock Document and Terminate Session"
               >
                 <Lock className="h-3.5 w-3.5" />
@@ -650,35 +650,35 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
           </header>
 
           {/* Security Notice Sub-strip */}
-          <div className="flex items-center justify-between border-b border-slate-800/80 bg-slate-950 px-4 py-1.5 text-[11px] text-slate-400">
+          <div className="flex items-center justify-between border-b border-[#e8e2d9] bg-[#f9f3ea] px-4 py-1.5 text-[11px] text-[#514534]">
             <div className="flex items-center gap-2">
-              <span className="flex h-2 w-2 rounded-full bg-emerald-400"></span>
-              <span>Protected Session Active • Strictly Confidential</span>
+              <span className="flex h-2 w-2 rounded-full bg-emerald-600"></span>
+              <span className="font-medium">Protected Session Active • Strictly Confidential</span>
             </div>
-            <div className="hidden sm:block text-slate-500">
+            <div className="hidden sm:block text-[#837561]">
               Direct downloads, screen capture, and printing are disabled.
             </div>
           </div>
 
-          {/* Canvas Document Stage */}
-          <main className="relative flex flex-1 items-center justify-center overflow-auto p-4 sm:p-8">
+          {/* Canvas Document Stage in Warm Parchment Background */}
+          <main className="relative flex flex-1 items-center justify-center overflow-auto bg-[#eee7de] p-4 sm:p-8">
             {isLoadingPage && (
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-slate-950/70 backdrop-blur-sm">
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-amber-500/20 border-t-amber-500" />
-                <p className="mt-3 text-xs font-medium text-slate-300">
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/70 backdrop-blur-sm">
+                <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#7f5700]/20 border-t-[#7f5700]" />
+                <p className="mt-3 text-xs font-semibold text-[#514534]">
                   Decrypting & rendering secure canvas...
                 </p>
               </div>
             )}
 
             {pageError ? (
-              <div className="flex max-w-md flex-col items-center rounded-xl border border-red-500/30 bg-slate-900 p-8 text-center shadow-2xl">
-                <AlertTriangle className="h-10 w-10 text-red-400" />
-                <h3 className="mt-3 text-lg font-bold text-white">Page Render Error</h3>
-                <p className="mt-1 text-sm text-slate-400">{pageError}</p>
+              <div className="flex max-w-md flex-col items-center rounded-2xl border border-[#ffa39e] bg-white p-8 text-center shadow-lg">
+                <AlertTriangle className="h-10 w-10 text-[#cf1322]" />
+                <h3 className="mt-3 font-heading text-lg font-bold text-[#1e1b16]">Page Render Error</h3>
+                <p className="mt-1 text-sm text-[#514534]">{pageError}</p>
                 <button
                   onClick={() => renderPageToCanvas()}
-                  className="mt-5 rounded-lg bg-amber-600 px-4 py-2 text-xs font-semibold text-white hover:bg-amber-500"
+                  className="mt-5 rounded-xl bg-[#7f5700] px-5 py-2.5 text-xs font-semibold text-white hover:bg-[#6a4900]"
                 >
                   Retry Loading
                 </button>
@@ -694,7 +694,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                 {/* HTML5 Canvas Element */}
                 <canvas
                   ref={canvasRef}
-                  className="rounded-lg border border-slate-800 shadow-2xl"
+                  className="rounded-lg border border-[#d6c4ad] shadow-2xl bg-white"
                   style={{
                     maxWidth: '100%',
                     height: 'auto',
@@ -713,23 +713,23 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
           </main>
         </div>
       ) : (
-        /* LOCKED: PIN VERIFICATION SCREEN */
-        <div className="flex min-h-[85vh] items-center justify-center p-4 sm:p-6">
-          <div className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950 p-6 sm:p-10 shadow-2xl">
-            {/* Top Amber Glowing Accent */}
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-amber-600 via-orange-500 to-amber-600" />
+        /* LOCKED: PIN VERIFICATION SCREEN IN LIGHT THEME */
+        <div className="flex min-h-[85vh] items-center justify-center p-4 sm:p-6 bg-[#fff8f0]">
+          <div className="relative w-full max-w-xl overflow-hidden rounded-2xl border border-[#d6c4ad] bg-white p-6 sm:p-10 shadow-lg">
+            {/* Top Golden Accent */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#7f5700]" />
 
             {/* Back link */}
             <div className="mb-6 flex items-center justify-between">
               <Link
                 href="/internal-documents"
-                className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-400 transition-colors hover:text-white"
+                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#514534] transition-colors hover:text-[#7f5700]"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
-                <span>Internal Documents Hub</span>
+                <span>Important Documents</span>
               </Link>
 
-              <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/20 bg-amber-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-amber-400">
+              <span className="inline-flex items-center gap-1 rounded-full border border-[#d6c4ad] bg-[#f4ede4] px-3 py-1 text-[11px] font-semibold text-[#7f5700]">
                 <Lock className="h-3 w-3" />
                 PIN Restricted
               </span>
@@ -737,32 +737,32 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
             {/* Header with requested exact wording */}
             <div className="text-center">
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-500/30 bg-amber-500/10 text-amber-400 shadow-inner">
+              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-[#d6c4ad] bg-[#f4ede4] text-[#7f5700] shadow-sm">
                 <KeyRound className="h-7 w-7" />
               </div>
 
               {/* Exact user-requested prominent statement */}
-              <h1 className="mt-5 text-xl font-bold tracking-tight text-white sm:text-2xl">
+              <h1 className="mt-5 font-heading text-xl font-bold tracking-tight text-[#7f5700] sm:text-2xl">
                 Important documents, for Internal Purposes only
               </h1>
 
               {/* Exact user-requested prompt */}
-              <p className="mt-2 text-sm font-medium text-amber-400/90">
+              <p className="mt-2 text-sm font-semibold text-[#514534]">
                 * Please enter the Designated PIN to view the document.
               </p>
 
               {/* Document Identity Banner */}
-              <div className="mt-6 rounded-xl border border-slate-800 bg-slate-950/80 p-4 text-left">
+              <div className="mt-6 rounded-xl border border-[#d6c4ad] bg-[#fffaf4] p-4 text-left">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <span className="text-[10px] font-bold tracking-wider text-amber-500 uppercase">
+                    <span className="text-[10px] font-bold tracking-wider text-[#7f5700] uppercase">
                       Target Document
                     </span>
-                    <h2 className="text-base font-bold text-white sm:text-lg">{doc.title}</h2>
-                    <p className="mt-0.5 text-xs text-slate-400">{doc.subtitle}</p>
-                    <p className="mt-1 text-[11px] text-slate-500">{doc.legalReference}</p>
+                    <h2 className="font-heading text-base font-bold text-[#1e1b16] sm:text-lg">{doc.title}</h2>
+                    <p className="mt-0.5 text-xs text-[#514534]">{doc.subtitle}</p>
+                    <p className="mt-1 text-[11px] font-mono text-[#837561]">{doc.legalReference}</p>
                   </div>
-                  <span className="rounded bg-slate-800 px-2 py-1 text-[11px] font-medium text-slate-300">
+                  <span className="rounded-full border border-[#d6c4ad] bg-white px-2.5 py-0.5 text-[11px] font-medium text-[#7f5700]">
                     {doc.badge}
                   </span>
                 </div>
@@ -771,22 +771,22 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
             {/* Error / Lockout Alert */}
             {authError && (
-              <div className="mt-5 rounded-xl border border-red-500/30 bg-red-950/50 p-3.5 text-xs text-red-200">
+              <div className="mt-5 rounded-xl border border-[#ffa39e] bg-[#fff1f0] p-3.5 text-xs text-[#cf1322]">
                 <div className="flex items-center gap-2">
-                  <AlertTriangle className="h-4 w-4 shrink-0 text-red-400" />
-                  <span className="font-medium">{authError}</span>
+                  <AlertTriangle className="h-4 w-4 shrink-0 text-[#cf1322]" />
+                  <span className="font-semibold">{authError}</span>
                 </div>
               </div>
             )}
 
             {/* Lockout Countdown Timer */}
             {lockoutSeconds > 0 && (
-              <div className="mt-4 rounded-xl border border-amber-500/30 bg-amber-950/40 p-4 text-center">
-                <p className="text-xs text-amber-300">Rate Limit Activated — Temporary Lockout</p>
-                <p className="mt-1 font-mono text-2xl font-bold text-amber-400">
+              <div className="mt-4 rounded-xl border border-[#ffe58f] bg-[#fffbe6] p-4 text-center">
+                <p className="text-xs font-semibold text-[#d48806]">Rate Limit Activated — Temporary Lockout</p>
+                <p className="mt-1 font-mono text-2xl font-bold text-[#d48806]">
                   {formatCountdown(lockoutSeconds)}
                 </p>
-                <p className="mt-1 text-[11px] text-amber-400/70">
+                <p className="mt-1 text-[11px] text-[#837561]">
                   Security lockout will automatically clear once the timer reaches zero.
                 </p>
               </div>
@@ -794,7 +794,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
             {/* 8-Digit PIN Input Form */}
             <div className="mt-6">
-              <label className="block text-center text-xs font-semibold tracking-wider text-slate-400 uppercase">
+              <label className="block text-center text-xs font-bold tracking-wider text-[#514534] uppercase">
                 Designated 8-Digit PIN
               </label>
 
@@ -807,7 +807,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                   <input
                     key={idx}
                     ref={(el) => {
-                      inputRefs.current[idx] = el
+                      if (el) inputRefs.current[idx] = el
                     }}
                     type={showPin ? 'text' : 'password'}
                     inputMode="numeric"
@@ -817,17 +817,17 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                     disabled={isVerifying || lockoutSeconds > 0}
                     onChange={(e) => handlePinChange(idx, e.target.value)}
                     onKeyDown={(e) => handleKeyDownPin(idx, e)}
-                    className="h-12 w-9 rounded-lg border border-slate-700 bg-slate-950 text-center font-mono text-xl font-bold text-white transition-all focus:border-amber-500 focus:bg-slate-900 focus:ring-2 focus:ring-amber-500/20 focus:outline-none disabled:opacity-40 sm:h-14 sm:w-11 sm:text-2xl"
+                    className="h-12 w-9 rounded-xl border-2 border-[#d6c4ad] bg-white text-center font-mono text-xl font-bold text-[#1e1b16] transition-all focus:border-[#7f5700] focus:ring-2 focus:ring-[#7f5700]/20 focus:outline-none disabled:opacity-40 sm:h-14 sm:w-11 sm:text-2xl"
                   />
                 ))}
               </div>
 
               {/* Visibility and Clear controls */}
-              <div className="mt-3 flex items-center justify-between px-2 text-xs text-slate-400">
+              <div className="mt-3 flex items-center justify-between px-2 text-xs text-[#514534]">
                 <button
                   type="button"
                   onClick={() => setShowPin(!showPin)}
-                  className="flex items-center gap-1.5 hover:text-slate-200"
+                  className="flex items-center gap-1.5 font-medium hover:text-[#7f5700]"
                 >
                   {showPin ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
                   <span>{showPin ? 'Hide PIN' : 'Reveal PIN'}</span>
@@ -839,20 +839,20 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                     setPinDigits(Array(8).fill(''))
                     inputRefs.current[0]?.focus()
                   }}
-                  className="hover:text-slate-200"
+                  className="font-medium hover:text-[#7f5700]"
                 >
                   Clear All
                 </button>
               </div>
 
-              {/* Unlock Action Button */}
+              {/* Open Document Action Button */}
               <button
                 type="button"
                 disabled={
                   isVerifying || lockoutSeconds > 0 || pinDigits.join('').length !== 8
                 }
                 onClick={() => handleVerify()}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-amber-600 via-orange-600 to-amber-600 px-6 py-3.5 text-sm font-bold text-white shadow-lg transition-all hover:from-amber-500 hover:to-orange-500 disabled:cursor-not-allowed disabled:opacity-40"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#7f5700] px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#6a4900] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {isVerifying ? (
                   <>
@@ -869,17 +869,17 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
             </div>
 
             {/* Rate Limiting & Security Notice Footer */}
-            <div className="mt-8 border-t border-slate-800/80 pt-5 text-center">
-              <div className="flex items-center justify-center gap-1.5 text-xs text-slate-400">
-                <ShieldCheck className="h-3.5 w-3.5 text-amber-400" />
+            <div className="mt-8 border-t border-[#e8e2d9] pt-5 text-center">
+              <div className="flex items-center justify-center gap-1.5 text-xs text-[#514534]">
+                <ShieldCheck className="h-3.5 w-3.5 text-[#7f5700]" />
                 <span>
                   Anti-Brute Force Protection Active • {remainingAttempts} attempts allowed before
                   lockout
                 </span>
               </div>
-              <p className="mt-1 text-[11px] text-slate-500">
-                This document is confidential. Access is logged. Unauthorized distribution, copying, or
-                public indexing is strictly prohibited.
+              <p className="mt-1 text-[11px] text-[#837561]">
+                This document is confidential. Access is logged. Unauthorized distribution or copying
+                is strictly prohibited.
               </p>
             </div>
           </div>

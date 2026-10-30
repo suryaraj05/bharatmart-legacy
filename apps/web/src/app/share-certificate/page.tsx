@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function ShareCertificatePage() {
   return (
-    <div className="min-h-screen bg-slate-950">
+    <div className="min-h-screen bg-[#fff8f0] text-[#1e1b16]">
       <SecureDocumentViewer doc={SHARE_DOC} />
     </div>
   )
