@@ -15,6 +15,7 @@ const nextConfig = {
   outputFileTracingRoot: path.join(__dirname, '../..'),
   outputFileTracingIncludes: {
     '/**': [
+      './secure_documents/**/*',
       './../../packages/database/generated/client/**/*',
       './../../node_modules/.pnpm/@prisma+client@*/node_modules/.prisma/client/**/*',
     ],
@@ -60,6 +61,31 @@ const nextConfig = {
         source: '/privacy',
         destination: '/privacy-policy',
         permanent: true,
+      },
+    ]
+  },
+  async headers() {
+    return [
+      {
+        source: '/:path*(company-registration-certificate|registration-incorporation-certificate|share-certificate|confirmation-statement|accounts-certificate|dummy-accounts-certificate|internal-documents|important-documents|api/certificates/:sub*)',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow, noarchive, nosnippet',
+          },
+          {
+            key: 'Cache-Control',
+            value: 'private, no-cache, no-store, must-revalidate',
+          },
+          {
+            key: 'Pragma',
+            value: 'no-cache',
+          },
+          {
+            key: 'Expires',
+            value: '0',
+          },
+        ],
       },
     ]
   },
