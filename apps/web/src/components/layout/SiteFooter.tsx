@@ -24,6 +24,7 @@ const footerGroups = [
       ['Contact Us', '/contact'],
       ['Privacy policy', '/privacy-policy'],
       ['Terms of service', '/terms'],
+      ['Important Documents', '/internal-documents'],
     ],
   },
 ] as const
@@ -96,7 +97,10 @@ export function SiteFooter() {
         <p>© {new Date().getFullYear()} BharatMart UK. All rights reserved.</p>
         <p>
           <strong className="font-semibold text-[#514534]">Bharat Mart Limited</strong>, Company
-          number: 16582568
+          number: 16582568 •{' '}
+          <Link href="/internal-documents" className="text-[#7f5700] hover:underline">
+            Important Documents
+          </Link>
         </p>
       </div>
     </footer>

@@ -857,12 +857,12 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                 {isVerifying ? (
                   <>
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
-                    <span>Verifying Security Clearance...</span>
+                    <span>Opening Document...</span>
                   </>
                 ) : (
                   <>
                     <Unlock className="h-4 w-4" />
-                    <span>Unlock Confidential Document</span>
+                    <span>Open Document</span>
                   </>
                 )}
               </button>

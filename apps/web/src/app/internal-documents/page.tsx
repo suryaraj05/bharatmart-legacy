@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import {
-  ShieldAlert,
   ShieldCheck,
   Lock,
   FileCheck2,
@@ -83,12 +82,6 @@ export default function InternalDocumentsHubPage() {
           <p className="mt-3 text-base font-semibold text-amber-400 sm:text-lg">
             * Please enter the Designated PIN to view the document.
           </p>
-
-          <p className="mx-auto mt-3 max-w-2xl text-sm text-slate-400">
-            These documents are confidential company records of BharatMart (UK) Limited. Each document
-            is secured with a dedicated 8-digit PIN, rate-limiting brute force protection, anti-screenshot
-            shields, and dynamic forensic watermarking.
-          </p>
         </div>
 
         {/* Document Cards Grid */}
@@ -137,7 +130,7 @@ export default function InternalDocumentsHubPage() {
                   href={doc.routePath}
                   className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-slate-800 to-slate-850 px-4 py-2.5 text-xs font-bold text-white border border-slate-700/80 transition-all group-hover:from-amber-600 group-hover:to-orange-600 group-hover:border-amber-500/50 group-hover:shadow-lg"
                 >
-                  <span>Open Document & Enter PIN</span>
+                  <span>Open Document</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -145,46 +138,8 @@ export default function InternalDocumentsHubPage() {
           ))}
         </div>
 
-        {/* Security & Confidentiality Framework Details */}
-        <div className="mt-14 rounded-2xl border border-slate-800/80 bg-slate-900/50 p-6 backdrop-blur-sm sm:p-8">
-          <div className="flex items-center gap-2.5 text-sm font-bold text-amber-400 uppercase tracking-wider">
-            <ShieldAlert className="h-4 w-4" />
-            <span>Confidentiality & Compliance Framework</span>
-          </div>
-
-          <div className="mt-4 grid gap-4 text-xs text-slate-400 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <span className="font-bold text-slate-200">1. Zero Public Indexing</span>
-              <p className="mt-1 text-[11px] text-slate-400">
-                Blocked in robots.txt, X-Robots-Tag, and noindex headers. Googlebot and crawlers are strictly forbidden.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <span className="font-bold text-slate-200">2. DRM & Anti-Download</span>
-              <p className="mt-1 text-[11px] text-slate-400">
-                Direct file downloads, drag-and-drop, right-click context menus, and print dialogs are intercepted and disabled.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <span className="font-bold text-slate-200">3. Anti-Screenshot Shield</span>
-              <p className="mt-1 text-[11px] text-slate-400">
-                Losing window focus or activating screen capture tools instantly conceals document pages with a security veil.
-              </p>
-            </div>
-
-            <div className="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <span className="font-bold text-slate-200">4. Rate-Limiting Protection</span>
-              <p className="mt-1 text-[11px] text-slate-400">
-                Maximum 5 attempts per document before a 15-minute security lockout is automatically enforced.
-              </p>
-            </div>
-          </div>
-        </div>
-
         {/* Footer info */}
-        <div className="mt-8 text-center text-xs text-slate-500">
+        <div className="mt-12 text-center text-xs text-slate-500">
           <p>BharatMart (UK) Limited • Registered in England & Wales • Company No: 16582568</p>
           <p className="mt-1">
             For designated access clearance, contact your compliance officer or internal administration.
