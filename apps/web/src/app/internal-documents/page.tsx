@@ -5,12 +5,14 @@ import {
   FileCheck2,
   PieChart,
   FileText,
+  FileSpreadsheet,
   ArrowRight,
 } from 'lucide-react'
 import {
   REGISTRATION_DOC,
   SHARE_DOC,
   CONFIRMATION_DOC,
+  ACCOUNTS_DOC,
 } from '@/lib/certificates-config'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
@@ -50,13 +52,18 @@ export default function InternalDocumentsHubPage() {
       icon: FileText,
       badgeColor: 'border-[#d6c4ad] bg-[#fffaf4] text-[#7f5700]',
     },
+    {
+      doc: ACCOUNTS_DOC,
+      icon: FileSpreadsheet,
+      badgeColor: 'border-[#d6c4ad] bg-[#fffaf4] text-[#7f5700]',
+    },
   ]
 
   return (
     <div className="min-h-screen w-full overflow-x-clip bg-[#fff8f0] text-[#1e1b16]">
       <SiteHeader />
 
-      <main className="mx-auto max-w-6xl px-4 py-12 md:px-8 lg:px-12">
+      <main className="mx-auto max-w-7xl px-4 py-12 md:px-8 lg:px-12">
         {/* Header Section */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#d6c4ad] bg-[#f4ede4] px-4 py-1.5 text-xs font-semibold text-[#7f5700] shadow-sm">
@@ -75,12 +82,12 @@ export default function InternalDocumentsHubPage() {
           </p>
         </div>
 
-        {/* Document Cards Grid - 3 Columns in Light Theme */}
-        <div className="mt-12 grid gap-8 md:grid-cols-3">
+        {/* Document Cards Grid - 4 Columns in Light Theme */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {docsList.map(({ doc, icon: Icon, badgeColor }) => (
             <div
               key={doc.id}
-              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#d6c4ad] bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#7f5700] hover:shadow-xl"
+              className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-[#d6c4ad] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#7f5700] hover:shadow-xl"
             >
               <div>
                 {/* Header row */}
@@ -88,24 +95,24 @@ export default function InternalDocumentsHubPage() {
                   <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#f4ede4] text-[#7f5700] shadow-sm transition-colors group-hover:bg-[#7f5700] group-hover:text-white">
                     <Icon className="h-6 w-6" />
                   </div>
-                  <span className={`rounded-full border px-3 py-1 text-[11px] font-semibold ${badgeColor}`}>
+                  <span className={`rounded-full border px-2.5 py-0.5 text-[10px] font-semibold ${badgeColor}`}>
                     {doc.badge}
                   </span>
                 </div>
 
                 {/* Document Information */}
-                <h2 className="mt-5 font-heading text-xl font-bold text-[#1e1b16] transition-colors group-hover:text-[#7f5700]">
+                <h2 className="mt-5 font-heading text-lg font-bold text-[#1e1b16] transition-colors group-hover:text-[#7f5700]">
                   {doc.title}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-[#514534]">{doc.subtitle}</p>
-                <p className="mt-3 font-mono text-xs text-[#837561]">{doc.legalReference}</p>
+                <p className="mt-2 text-xs leading-relaxed text-[#514534]">{doc.subtitle}</p>
+                <p className="mt-3 font-mono text-[11px] text-[#837561]">{doc.legalReference}</p>
               </div>
 
               {/* Action Button */}
               <div className="mt-8 border-t border-[#e8e2d9] pt-5">
                 <Link
                   href={doc.routePath}
-                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#7f5700] px-5 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#6a4900] hover:shadow-md"
+                  className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#7f5700] px-4 py-3 text-xs font-semibold text-white shadow-sm transition-all hover:bg-[#6a4900] hover:shadow-md"
                 >
                   <span>Open Document</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

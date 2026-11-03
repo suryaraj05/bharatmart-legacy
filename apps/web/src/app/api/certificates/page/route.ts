@@ -14,10 +14,16 @@ function findPageFile(docId: string, fileName: string): string | null {
     path.join(__dirname, '..', '..', '..', '..', '..', 'apps', 'web', 'secure_documents', 'pages'),
   ]
 
+  const docFolders = [docId]
+  if (docId === 'account-statements') docFolders.push('accounts-certificate')
+  if (docId === 'accounts-certificate') docFolders.push('account-statements')
+
   for (const root of candidateRoots) {
-    const fullPath = path.join(root, docId, fileName)
-    if (fs.existsSync(fullPath)) {
-      return fullPath
+    for (const folder of docFolders) {
+      const fullPath = path.join(root, folder, fileName)
+      if (fs.existsSync(fullPath)) {
+        return fullPath
+      }
     }
   }
 

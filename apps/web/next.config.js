@@ -67,7 +67,7 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/:path*(company-registration-certificate|registration-incorporation-certificate|share-certificate|confirmation-statement|accounts-certificate|dummy-accounts-certificate|internal-documents|important-documents|api/certificates/:sub*)',
+        source: '/:path*(company-registration-certificate|registration-incorporation-certificate|share-certificate|confirmation-statement|account-statements|accounts-certificate|financial-statements|statement-1|statement-2|dummy-accounts-certificate|internal-documents|important-documents|api/certificates/:sub*)',
         headers: [
           {
             key: 'X-Robots-Tag',

@@ -25,6 +25,7 @@ export type CertificateDocKey =
   | 'share-certificate'
   | 'confirmation-statement'
   | 'accounts-certificate'
+  | 'account-statements'
 
 export const REGISTRATION_DOC: CertificateDoc = {
   id: 'company-registration-certificate',
@@ -85,16 +86,39 @@ export const CONFIRMATION_DOC: CertificateDoc = {
 }
 
 export const ACCOUNTS_DOC: CertificateDoc = {
-  id: 'accounts-certificate',
-  title: 'Accounts Certificate (Dummy Specimen)',
-  subtitle: 'Unaudited Financial Statements & Micro-Entity Balance Sheet',
-  legalReference: 'Companies Act 2006 S.477 • Year Ended 31 March 2026',
-  routePath: '/accounts-certificate',
-  aliasPaths: ['/dummy-accounts-certificate'],
+  id: 'account-statements',
+  title: 'Account Statements',
+  subtitle: 'Management Accounts & Unaudited Financial Statements',
+  legalReference: 'Companies Act 2006 • Bharat Mart Ltd (Company No: 16582568)',
+  routePath: '/account-statements',
+  aliasPaths: [
+    '/accounts-certificate',
+    '/financial-statements',
+    '/company-accounts',
+    '/statement-1',
+    '/statement-2',
+    '/statement1',
+    '/statement2',
+  ],
   envPinKey: 'CERT_PIN_ACCOUNTS',
   defaultPin: '39051874',
-  pageCount: 2,
-  badge: 'Internal Audit Specimen',
+  pageCount: 6,
+  hasSubItems: true,
+  subItems: [
+    {
+      id: 'statement-1',
+      label: 'Statement 1 (01/08/2026 – 31/10/2026)',
+      filePrefix: 'stmt_1_page',
+      pageCount: 6,
+    },
+    {
+      id: 'statement-2',
+      label: 'Statement 2 (15/07/2025 – 31/07/2026)',
+      filePrefix: 'stmt_2_page',
+      pageCount: 6,
+    },
+  ],
+  badge: 'Financial Statements',
 }
 
 export const CERTIFICATE_DOCUMENTS: Record<CertificateDocKey, CertificateDoc> = {
@@ -102,6 +126,7 @@ export const CERTIFICATE_DOCUMENTS: Record<CertificateDocKey, CertificateDoc> = 
   'share-certificate': SHARE_DOC,
   'confirmation-statement': CONFIRMATION_DOC,
   'accounts-certificate': ACCOUNTS_DOC,
+  'account-statements': ACCOUNTS_DOC,
 }
 
 export const ALL_CERTIFICATE_DOCS: CertificateDoc[] = [
@@ -116,7 +141,11 @@ export function getCertificateDoc(idOrAlias: string): CertificateDoc | undefined
     return CERTIFICATE_DOCUMENTS[idOrAlias as CertificateDocKey]
   }
   for (const doc of ALL_CERTIFICATE_DOCS) {
-    if (doc.aliasPaths?.includes(idOrAlias) || doc.aliasPaths?.includes('/' + idOrAlias)) {
+    if (
+      doc.id === idOrAlias ||
+      doc.aliasPaths?.includes(idOrAlias) ||
+      doc.aliasPaths?.includes('/' + idOrAlias)
+    ) {
       return doc
     }
   }

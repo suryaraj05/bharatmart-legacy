@@ -134,7 +134,12 @@ export function verifyViewingToken(token: string, docId: string): boolean {
   try {
     const payload = JSON.parse(Buffer.from(payloadB64, 'base64url').toString('utf8'))
     if (!payload || typeof payload !== 'object') return false
-    if (payload.docId !== docId) return false
+    if (payload.docId !== docId) {
+      const isAccountsMatch =
+        (payload.docId === 'account-statements' && docId === 'accounts-certificate') ||
+        (payload.docId === 'accounts-certificate' && docId === 'account-statements')
+      if (!isAccountsMatch) return false
+    }
     if (!payload.exp || typeof payload.exp !== 'number') return false
     if (Date.now() > payload.exp) return false
     return true
