@@ -136,8 +136,8 @@ export function verifyViewingToken(token: string, docId: string): boolean {
     if (!payload || typeof payload !== 'object') return false
     if (payload.docId !== docId) {
       const isAccountsMatch =
-        (payload.docId === 'account-statements' && docId === 'accounts-certificate') ||
-        (payload.docId === 'accounts-certificate' && docId === 'account-statements')
+        ['account-statements', 'accounts-certificate', 'financial-statements', 'account-statement-1', 'account-statement-2'].includes(payload.docId) &&
+        ['account-statements', 'accounts-certificate', 'financial-statements', 'account-statement-1', 'account-statement-2'].includes(docId)
       if (!isAccountsMatch) return false
     }
     if (!payload.exp || typeof payload.exp !== 'number') return false

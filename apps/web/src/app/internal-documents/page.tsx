@@ -12,7 +12,8 @@ import {
   REGISTRATION_DOC,
   SHARE_DOC,
   CONFIRMATION_DOC,
-  ACCOUNTS_DOC,
+  STATEMENT_1_DOC,
+  STATEMENT_2_DOC,
 } from '@/lib/certificates-config'
 import { SiteHeader } from '@/components/layout/SiteHeader'
 import { SiteFooter } from '@/components/layout/SiteFooter'
@@ -53,7 +54,12 @@ export default function InternalDocumentsHubPage() {
       badgeColor: 'border-[#d6c4ad] bg-[#fffaf4] text-[#7f5700]',
     },
     {
-      doc: ACCOUNTS_DOC,
+      doc: STATEMENT_1_DOC,
+      icon: FileSpreadsheet,
+      badgeColor: 'border-[#d6c4ad] bg-[#fffaf4] text-[#7f5700]',
+    },
+    {
+      doc: STATEMENT_2_DOC,
       icon: FileSpreadsheet,
       badgeColor: 'border-[#d6c4ad] bg-[#fffaf4] text-[#7f5700]',
     },
@@ -82,8 +88,8 @@ export default function InternalDocumentsHubPage() {
           </p>
         </div>
 
-        {/* Document Cards Grid - 4 Columns in Light Theme */}
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Document Cards Grid - 5 Distinct Documents in Light Theme */}
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {docsList.map(({ doc, icon: Icon, badgeColor }) => (
             <div
               key={doc.id}

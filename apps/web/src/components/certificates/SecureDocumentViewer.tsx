@@ -15,6 +15,7 @@ import {
   ChevronLeft,
   ChevronRight,
   RotateCw,
+  RotateCcw,
   AlertTriangle,
   KeyRound,
   ArrowLeft,
@@ -31,6 +32,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
   const [pinDigits, setPinDigits] = useState<string[]>(Array(8).fill(''))
   const [showPin, setShowPin] = useState(false)
   const [isVerifying, setIsVerifying] = useState(false)
+  const [verifyProgressStep, setVerifyProgressStep] = useState<string>('')
   const [authError, setAuthError] = useState<string | null>(null)
   const [token, setToken] = useState<string | null>(null)
   const [isUnlocked, setIsUnlocked] = useState(false)
@@ -275,7 +277,7 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
     }
   }
 
-  // Verification request
+  // Verification request with deliberate security delay
   const handleVerify = async (fullPin?: string) => {
     const pin = fullPin || pinDigits.join('')
     if (pin.length !== 8) {
@@ -290,17 +292,27 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
     setIsVerifying(true)
     setAuthError(null)
+    setVerifyProgressStep('Verifying 8-digit PIN...')
 
     try {
-      const res = await fetch('/api/certificates/verify-pin', {
+      const startTime = Date.now()
+      const fetchPromise = fetch('/api/certificates/verify-pin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ docId: doc.id, pin }),
       })
 
+      // Initial validation pulse
+      await new Promise((resolve) => setTimeout(resolve, 450))
+
+      const res = await fetchPromise
       const data = await res.json()
 
       if (!res.ok || !data.success) {
+        const elapsed = Date.now() - startTime
+        if (elapsed < 700) {
+          await new Promise((resolve) => setTimeout(resolve, 700 - elapsed))
+        }
         if (data.lockoutRemainingSeconds) {
           setLockoutSeconds(data.lockoutRemainingSeconds)
         }
@@ -309,17 +321,30 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
         }
         setAuthError(data.error || 'Authentication failed. Please check the 8-digit PIN.')
         setIsVerifying(false)
+        setVerifyProgressStep('')
         return
       }
+
+      // Deliberate multi-stage secure decryption handshake
+      setVerifyProgressStep('Validating internal clearance...')
+      await new Promise((resolve) => setTimeout(resolve, 450))
+
+      setVerifyProgressStep('Decrypting confidential specimen...')
+      await new Promise((resolve) => setTimeout(resolve, 500))
+
+      setVerifyProgressStep('Rendering secure DRM canvas...')
+      await new Promise((resolve) => setTimeout(resolve, 400))
 
       // Success
       setToken(data.token)
       setIsUnlocked(true)
       setIsVerifying(false)
+      setVerifyProgressStep('')
       setCurrentPage(1)
     } catch {
       setAuthError('Network communication error. Please try again.')
       setIsVerifying(false)
+      setVerifyProgressStep('')
     }
   }
 
@@ -334,12 +359,13 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
     }
   }
 
-  // Render Page onto Canvas with Dynamic Watermarks
+  // Render Page onto Canvas with Dynamic Watermarks and Refresh Delay
   const renderPageToCanvas = useCallback(async () => {
     if (!isUnlocked || !canvasRef.current) return
 
     setIsLoadingPage(true)
     setPageError(null)
+    const requestStartTime = Date.now()
 
     try {
       const subParam = activeSubItem ? `&subItem=${encodeURIComponent(activeSubItem.id)}` : ''
@@ -361,61 +387,69 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
 
       const img = new Image()
       img.onload = () => {
-        const canvas = canvasRef.current
-        if (!canvas) {
-          URL.revokeObjectURL(objectUrl)
-          return
-        }
+        // Enforce a deliberate minimum refresh rate delay (650ms)
+        const elapsed = Date.now() - requestStartTime
+        const refreshDelay = Math.max(0, 650 - elapsed)
 
-        const ctx = canvas.getContext('2d', { alpha: false })
-        if (!ctx) {
-          URL.revokeObjectURL(objectUrl)
-          return
-        }
-
-        // Set high-res canvas dimensions
-        canvas.width = img.naturalWidth
-        canvas.height = img.naturalHeight
-
-        // Draw document page
-        ctx.drawImage(img, 0, 0)
-
-        // Draw Dynamic Semi-Transparent Watermark Grid directly into canvas pixels
-        ctx.save()
-        ctx.rotate((-28 * Math.PI) / 180)
-        ctx.font = 'bold 36px sans-serif'
-        ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
-        ctx.textAlign = 'center'
-
-        const text1 = 'CONFIDENTIAL • INTERNAL PURPOSES ONLY'
-        const text2 = 'BHARATMART (UK) LIMITED • DO NOT DISTRIBUTE'
-        const text3 = `OFFICIAL VIEW • ${watermarkDate || new Date().toISOString()}`
-
-        const stepX = 650
-        const stepY = 280
-        const startX = -canvas.width
-        const endX = canvas.width * 2
-        const startY = -canvas.height
-        const endY = canvas.height * 2
-
-        for (let y = startY; y < endY; y += stepY) {
-          for (let x = startX; x < endX; x += stepX) {
-            ctx.fillText(text1, x, y)
-            ctx.font = '600 24px sans-serif'
-            ctx.fillStyle = 'rgba(81, 69, 52, 0.16)'
-            ctx.fillText(text2, x, y + 36)
-            ctx.font = '500 18px sans-serif'
-            ctx.fillStyle = 'rgba(168, 54, 53, 0.12)'
-            ctx.fillText(text3, x, y + 68)
-            ctx.font = 'bold 36px sans-serif'
-            ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
+        setTimeout(() => {
+          const canvas = canvasRef.current
+          if (!canvas) {
+            URL.revokeObjectURL(objectUrl)
+            setIsLoadingPage(false)
+            return
           }
-        }
-        ctx.restore()
 
-        // Immediate cleanup of blob URL to prevent memory inspection
-        URL.revokeObjectURL(objectUrl)
-        setIsLoadingPage(false)
+          const ctx = canvas.getContext('2d', { alpha: false })
+          if (!ctx) {
+            URL.revokeObjectURL(objectUrl)
+            setIsLoadingPage(false)
+            return
+          }
+
+          // Set high-res canvas dimensions
+          canvas.width = img.naturalWidth
+          canvas.height = img.naturalHeight
+
+          // Draw document page
+          ctx.drawImage(img, 0, 0)
+
+          // Draw Dynamic Semi-Transparent Watermark Grid directly into canvas pixels
+          ctx.save()
+          ctx.rotate((-28 * Math.PI) / 180)
+          ctx.font = 'bold 36px sans-serif'
+          ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
+          ctx.textAlign = 'center'
+
+          const text1 = 'CONFIDENTIAL • INTERNAL PURPOSES ONLY'
+          const text2 = 'BHARATMART (UK) LIMITED • DO NOT DISTRIBUTE'
+          const text3 = `OFFICIAL VIEW • ${watermarkDate || new Date().toISOString()}`
+
+          const stepX = 650
+          const stepY = 280
+          const startX = -canvas.width
+          const endX = canvas.width * 2
+          const startY = -canvas.height
+          const endY = canvas.height * 2
+
+          for (let y = startY; y < endY; y += stepY) {
+            for (let x = startX; x < endX; x += stepX) {
+              ctx.fillText(text1, x, y)
+              ctx.font = '600 24px sans-serif'
+              ctx.fillStyle = 'rgba(81, 69, 52, 0.16)'
+              ctx.fillText(text2, x, y + 36)
+              ctx.font = '500 18px sans-serif'
+              ctx.fillStyle = 'rgba(168, 54, 53, 0.12)'
+              ctx.fillText(text3, x, y + 68)
+              ctx.font = 'bold 36px sans-serif'
+              ctx.fillStyle = 'rgba(168, 54, 53, 0.14)'
+            }
+          }
+          ctx.restore()
+
+          // Immediate cleanup of blob URL to prevent memory inspection
+          URL.revokeObjectURL(objectUrl)
+          setIsLoadingPage(false)
+        }, refreshDelay)
       }
 
       img.onerror = () => {
@@ -615,6 +649,17 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                 </button>
               </div>
 
+              {/* Refresh Document View */}
+              <button
+                disabled={isLoadingPage}
+                onClick={() => renderPageToCanvas()}
+                className="flex items-center gap-1 rounded-lg border border-[#d6c4ad] bg-[#fffaf4] px-2.5 py-1.5 text-xs font-semibold text-[#514534] transition-colors hover:bg-[#f4ede4] hover:text-[#1e1b16] disabled:opacity-40"
+                title="Refresh secure canvas view & timestamp"
+              >
+                <RotateCcw className={`h-3.5 w-3.5 ${isLoadingPage ? 'animate-spin text-[#7f5700]' : ''}`} />
+                <span className="hidden sm:inline">Refresh</span>
+              </button>
+
               {/* Rotate */}
               <button
                 onClick={() => setRotation((r) => (r + 90) % 360)}
@@ -663,11 +708,21 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
           {/* Canvas Document Stage in Warm Parchment Background */}
           <main className="relative flex flex-1 items-center justify-center overflow-auto bg-[#eee7de] p-4 sm:p-8">
             {isLoadingPage && (
-              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-white/70 backdrop-blur-sm">
-                <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#7f5700]/20 border-t-[#7f5700]" />
-                <p className="mt-3 text-xs font-semibold text-[#514534]">
-                  Decrypting & rendering secure canvas...
-                </p>
+              <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-[#fff8f0]/85 backdrop-blur-sm transition-opacity duration-200">
+                <div className="flex flex-col items-center gap-3 rounded-2xl border border-[#d6c4ad] bg-white p-6 shadow-xl">
+                  <div className="relative">
+                    <div className="h-12 w-12 animate-spin rounded-full border-3 border-[#7f5700]/20 border-t-[#7f5700]" />
+                    <RotateCw className="absolute inset-0 m-auto h-5 w-5 animate-pulse text-[#7f5700]" />
+                  </div>
+                  <div className="text-center">
+                    <p className="font-heading text-sm font-bold text-[#1e1b16]">
+                      Refreshing Secure View
+                    </p>
+                    <p className="mt-0.5 text-xs text-[#514534]">
+                      Page {currentPage} of {totalPages} • Applying DRM watermark
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -855,10 +910,10 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                 className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#7f5700] px-6 py-3.5 text-sm font-bold text-white shadow-md transition-all hover:bg-[#6a4900] disabled:cursor-not-allowed disabled:opacity-40"
               >
                 {isVerifying ? (
-                  <>
+                  <div className="flex items-center gap-2.5">
                     <div className="h-4 w-4 animate-spin rounded-full border-2 border-white/20 border-t-white" />
-                    <span>Opening Document...</span>
-                  </>
+                    <span>{verifyProgressStep || 'Verifying credentials...'}</span>
+                  </div>
                 ) : (
                   <>
                     <Unlock className="h-4 w-4" />
@@ -866,6 +921,13 @@ export function SecureDocumentViewer({ doc }: SecureDocumentViewerProps) {
                   </>
                 )}
               </button>
+
+              {/* Progressive Verification Bar */}
+              {isVerifying && (
+                <div className="mt-3 overflow-hidden rounded-full bg-[#f4ede4]">
+                  <div className="h-1.5 w-full animate-pulse rounded-full bg-[#7f5700] transition-all duration-300" />
+                </div>
+              )}
             </div>
 
             {/* Rate Limiting & Security Notice Footer */}

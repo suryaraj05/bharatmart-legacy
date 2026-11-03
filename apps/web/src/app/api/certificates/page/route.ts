@@ -15,8 +15,10 @@ function findPageFile(docId: string, fileName: string): string | null {
   ]
 
   const docFolders = [docId]
-  if (docId === 'account-statements') docFolders.push('accounts-certificate')
-  if (docId === 'accounts-certificate') docFolders.push('account-statements')
+  if (docId === 'account-statements') docFolders.push('accounts-certificate', 'account-statement-1', 'account-statement-2')
+  if (docId === 'accounts-certificate') docFolders.push('account-statements', 'account-statement-1', 'account-statement-2')
+  if (docId === 'account-statement-1') docFolders.push('account-statements', 'accounts-certificate')
+  if (docId === 'account-statement-2') docFolders.push('account-statements', 'accounts-certificate')
 
   for (const root of candidateRoots) {
     for (const folder of docFolders) {
@@ -66,7 +68,15 @@ export async function GET(req: NextRequest) {
 
     // Determine target filename
     let targetFileName = `page_${pageNum}.webp`
-    if (doc.hasSubItems && doc.subItems && doc.subItems.length > 0) {
+    if (doc.id === 'account-statement-1') {
+      targetFileName = findPageFile('account-statement-1', `page_${pageNum}.webp`)
+        ? `page_${pageNum}.webp`
+        : `stmt_1_page_${pageNum}.webp`
+    } else if (doc.id === 'account-statement-2') {
+      targetFileName = findPageFile('account-statement-2', `page_${pageNum}.webp`)
+        ? `page_${pageNum}.webp`
+        : `stmt_2_page_${pageNum}.webp`
+    } else if (doc.hasSubItems && doc.subItems && doc.subItems.length > 0) {
       const activeSub = doc.subItems.find((s) => s.id === subItemId) || doc.subItems[0]
       if (activeSub) {
         targetFileName = `${activeSub.filePrefix}_${pageNum}.webp`
